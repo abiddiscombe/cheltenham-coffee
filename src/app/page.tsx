@@ -1,3 +1,5 @@
-export default function Home() {
-  return <>Cheltenham Coffee Map</>;
+import { redirect } from "next/navigation";
+
+export default function Page() {
+  redirect("/map");
 }
