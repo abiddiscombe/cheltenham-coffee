@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  /* Tailwind CSS - Neutral Pallette */
+  /* Tailwind CSS - Inherit the default
+     'neutral' color pallette. */
+
   --color-primary-50: oklch(0.985 0 0);
   --color-primary-100: oklch(0.97 0 0);
   --color-primary-200: oklch(0.922 0 0);
@@ -13,4 +15,11 @@
   --color-primary-800: oklch(0.269 0 0);
   --color-primary-900: oklch(0.205 0 0);
   --color-primary-950: oklch(0.145 0 0);
+}
+
+html {
+  /* Disable overscroll support on mobile devices
+     to improve map functionality and control. */
+
+  overscroll-behavior: none;
 }
