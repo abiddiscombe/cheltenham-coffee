@@ -43,20 +43,14 @@ export default function MapCanvas() {
       initialViewState={{ zoom: 12, latitude: 51.900091, longitude: -2.076931 }}
       style={{ gridRow: 1, gridColumn: 1, zIndex: 0 }}
     >
-      {locations.map((location) => {
-        if (location.hidden) {
-          return;
-        }
-
-        return (
-          <Pin
-            id={location.id}
-            key={location.id}
-            latitude={location.latitude}
-            longitude={location.longitude}
-          />
-        );
-      })}
+      {locations.map((location) => (
+        <Pin
+          id={location.id}
+          key={location.id}
+          latitude={location.latitude}
+          longitude={location.longitude}
+        />
+      ))}
     </Map>
   );
 }

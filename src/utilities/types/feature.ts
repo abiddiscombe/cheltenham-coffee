@@ -5,7 +5,6 @@ import { type UUID } from "crypto";
 
 export interface Feature {
   id: UUID;
-  hidden: boolean;
   latitude: number;
   longitude: number;
 }
