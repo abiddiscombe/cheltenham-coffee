@@ -4,10 +4,7 @@ import * as pmtiles from "pmtiles";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { Map } from "@vis.gl/react-maplibre";
-
-// The basemap (OS Zoomstack via PMTiles) is loaded from
-// an external file server (configuration per environment).
-const BASEMAP_STYLE_URL = process.env["NEXT_PUBLIC_BASEMAP_STYLE_URL"];
+import { getBasemapConfig } from "@/utilities/basemap";
 
 export default function MapCanvas() {
   useEffect(() => {
@@ -20,7 +17,7 @@ export default function MapCanvas() {
   return (
     <Map
       mapLib={maplibregl}
-      mapStyle={BASEMAP_STYLE_URL}
+      mapStyle={getBasemapConfig()}
       minZoom={12}
       maxZoom={14}
       maxBounds={[-2.308159, 51.83705, -1.865959, 51.971346]}
