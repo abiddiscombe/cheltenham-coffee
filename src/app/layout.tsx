@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import Header from "./_Header";
 
 export const metadata: Metadata = {
@@ -23,11 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="bg-primary-50 h-dvh grid grid-rows-[auto_1fr]">
-        <Header />
-        <main>{children}</main>
-      </body>
-    </html>
+    <NuqsAdapter>
+      <html lang="en">
+        <body className="bg-primary-50 h-dvh grid grid-rows-[auto_1fr]">
+          <Header />
+          <main>{children}</main>
+        </body>
+      </html>
+    </NuqsAdapter>
   );
 }
