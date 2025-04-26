@@ -20,7 +20,12 @@ export default function Pin(p: Feature) {
   }
 
   return (
-    <Marker anchor="bottom" latitude={p.latitude} longitude={p.longitude}>
+    <Marker
+      anchor="bottom"
+      latitude={p.latitude}
+      longitude={p.longitude}
+      className={activeLocation === p.id ? "z-10" : "hover:z-10"}
+    >
       <MapPinIcon className={classes} onClick={handleSelect} />
     </Marker>
   );
