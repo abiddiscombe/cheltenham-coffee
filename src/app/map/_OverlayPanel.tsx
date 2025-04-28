@@ -6,13 +6,13 @@ import Button from "@/components/Button";
 import Surface from "@/components/Surface";
 import Typography from "@/components/Typography";
 import { NUQS_KEYS } from "@/utilities/constants";
-import { FeatureExtended } from "@/utilities/types/feature";
+import { LocationExtended } from "@/utilities/types/location";
 
 // @todo Improve loading state UI and
 // implement Skeleton component layout.
 
 export default function OverlayPanel() {
-  const [locationDetails, setLocationDetails] = useState<FeatureExtended>();
+  const [locationDetails, setLocationDetails] = useState<LocationExtended>();
   const [activeLocation, setActiveLocation] = useQueryState(NUQS_KEYS.SELECTED);
 
   function handleClose() {

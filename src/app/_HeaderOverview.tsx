@@ -5,6 +5,7 @@ import { REPO_URL } from "@/utilities/constants";
 
 export default function HeaderOverview() {
   // @todo Replace this link and icon with a dialog.
+  // @todo Use alternative source for GitHub logo icon.
 
   function openLink() {
     window.open(REPO_URL, "_blank");

@@ -5,11 +5,11 @@ import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { Map } from "@vis.gl/react-maplibre";
 import { getBasemapConfig } from "@/utilities/basemap";
-import { type Feature } from "@/utilities/types/feature";
+import { type Location } from "@/utilities/types/location";
 import Pin from "./_Pin";
 
 export default function MapCanvas() {
-  const [locations, setLocations] = useState<Feature[]>([]);
+  const [locations, setLocations] = useState<Location[]>([]);
 
   async function getLocations() {
     const res = await fetch("/api/locations");

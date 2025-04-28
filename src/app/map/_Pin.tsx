@@ -3,9 +3,9 @@ import { twMerge } from "tailwind-merge";
 import { MapPinIcon } from "lucide-react";
 import { Marker } from "@vis.gl/react-maplibre";
 import { NUQS_KEYS } from "@/utilities/constants";
-import { Feature } from "@/utilities/types/feature";
+import { Location } from "@/utilities/types/location";
 
-export default function Pin(p: Feature) {
+export default function Pin(p: Location) {
   const [activeLocation, setActiveLocation] = useQueryState(NUQS_KEYS.SELECTED);
 
   const classes = twMerge(
