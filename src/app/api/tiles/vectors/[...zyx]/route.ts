@@ -71,5 +71,9 @@ export async function GET(
 
   return new Response(tile, {
     status: 200,
+    headers: {
+      "Body-Source": "Ordnance Survey",
+      "Cache-Control": "max-age=604800",
+    },
   });
 }
