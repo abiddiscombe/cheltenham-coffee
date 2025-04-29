@@ -14,8 +14,8 @@ export async function GET(
       {
         error:
           status === 404
-            ? "Location Not Found"
-            : "Upstream Service Unavailable",
+            ? "Location not found."
+            : "Upstream service unavailable.",
       },
       { status: status === 404 ? 404 : 500 },
     );

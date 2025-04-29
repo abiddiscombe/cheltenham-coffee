@@ -7,7 +7,7 @@ export async function GET() {
   if (status !== 200 || !body) {
     return Response.json(
       {
-        error: "Upstream Service Unavailable",
+        error: "Upstream service unavailable.",
       },
       { status: 500 },
     );
