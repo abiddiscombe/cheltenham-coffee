@@ -1,39 +1,46 @@
 "use client";
 import { useEffect, useState } from "react";
-import { XIcon } from "lucide-react";
 import { useQueryState } from "nuqs";
-import Button from "@/components/Button";
-import Surface from "@/components/Surface";
-import Typography from "@/components/Typography";
+import { BadgeAlertIcon, PanelLeftCloseIcon, XIcon } from "lucide-react";
+import OverlayPanelTags from "./_OverlayPanelTags";
+import OverlayPanelExp from "./_OverlayPanelExp";
 import { NUQS_KEYS } from "@/utilities/constants";
 import { LocationExtended } from "@/utilities/types/location";
+import Button from "@/components/Button";
+import Banner from "@/components/Banner";
+import Spinner from "@/components/Spinner";
+import Typography from "@/components/Typography";
 
-// @todo Improve loading state UI and
-// implement Skeleton component layout.
+// @todo Replace CSS-based conditional rendering
+// of the close button with a client-side React hook.
 
 export default function OverlayPanel() {
-  const [locationDetails, setLocationDetails] = useState<LocationExtended>();
-  const [activeLocation, setActiveLocation] = useQueryState(NUQS_KEYS.SELECTED);
+  const [locationId, setLocationId] = useQueryState(NUQS_KEYS.SELECTED);
+
+  const [locationInfo, setLocationInfo] = useState<LocationExtended>();
+  const [locationInfoLoading, setLocationInfoLoading] = useState(false);
 
   function handleClose() {
-    setActiveLocation(null);
+    setLocationId(null);
   }
 
   async function getLocationDetails() {
-    const res = await fetch(`/api/locations/${activeLocation}`);
+    setLocationInfoLoading(true);
+    const res = await fetch(`/api/locations/${locationId}`);
 
     if (res.status !== 200) {
-      console.error(`Failed to GET '/api/locations/${activeLocation}'`);
-      setActiveLocation(null);
+      console.error(`Failed to GET '/api/locations/${locationId}'`);
+      setLocationId(null);
       return;
     }
 
     const resJson = await res.json();
-    setLocationDetails(resJson.location);
+    setLocationInfo(resJson.location);
+    setLocationInfoLoading(false);
   }
 
   useEffect(() => {
-    if (activeLocation) {
+    if (locationId) {
       getLocationDetails();
     }
 
@@ -41,28 +48,65 @@ export default function OverlayPanel() {
       // Clear stale data if user selects a
       // new location whilst the panel is visible.
 
-      setLocationDetails(undefined);
+      setLocationInfo(undefined);
     };
-  }, [activeLocation]);
+  }, [locationId]);
 
   return (
-    <div className="z-20 flex items-end sm:items-start p-2 sm:p-6 sm:pb-14 pointer-events-none">
-      {activeLocation && (
-        <Surface className="w-full sm:w-sm pointer-events-auto">
-          <div className="mt-2 mb-4 flex items-start gap-6 justify-between">
-            <Typography variant="h2" className="mb-0 mt-0.5">
-              {locationDetails?.name}
-            </Typography>
-            <Button variant="ghost" size="icon" onClick={handleClose}>
-              <XIcon className="h-4.5 w-4.5" />
-            </Button>
-          </div>
-          {locationDetails?.metadata?.summary && (
-            <Typography variant="body">
-              {locationDetails?.metadata?.summary}
-            </Typography>
+    <div className="z-20 flex items-stretch pointer-events-none">
+      {locationId && (
+        <div className="bg-white/80 backdrop-blur-xs p-8 shadow border-r border-r-primary-200 w-full sm:w-sm pointer-events-auto">
+          {locationInfoLoading && !locationInfo ? (
+            <div className="h-full grid place-items-center">
+              <Spinner />
+            </div>
+          ) : (
+            <div className="h-full grid gap-6 grid-rows-[1fr_auto_auto]">
+              <div>
+                <div className="mb-4 flex items-start justify-between">
+                  <Typography variant="h2" className="mb-0">
+                    {locationInfo?.name}
+                  </Typography>
+                  <Button
+                    size="icon"
+                    onClick={handleClose}
+                    aria-label="Close Side Panel"
+                    className="flex sm:hidden"
+                  >
+                    <XIcon />
+                  </Button>
+                </div>
+                {locationInfo?.metadata?.summary && (
+                  <Typography variant="body">
+                    {locationInfo?.metadata?.summary}
+                  </Typography>
+                )}
+                <OverlayPanelExp metadata={locationInfo?.metadata} />
+                <OverlayPanelTags tags={locationInfo?.tags} />
+              </div>
+              <div>
+                <Banner variant="warning">
+                  This app is a work in progress and some data may be
+                  inaccurate.
+                </Banner>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button className="grow">
+                  <BadgeAlertIcon />
+                  Feedback
+                </Button>
+                <Button
+                  size="icon"
+                  onClick={handleClose}
+                  aria-label="Close Side Panel"
+                  className="hidden sm:flex"
+                >
+                  <PanelLeftCloseIcon />
+                </Button>
+              </div>
+            </div>
           )}
-        </Surface>
+        </div>
       )}
     </div>
   );

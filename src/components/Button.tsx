@@ -4,8 +4,8 @@ import { twMerge } from "tailwind-merge";
 const cvaButton = cva("shrink-0 rounded border flex items-center", {
   variants: {
     size: {
-      text: "gap-2.5 px-6 h-9 max-h-9 text-md",
-      icon: "w-10 max-w-10 h-9 max-h-9 text-md justify-center",
+      text: "gap-2.5 px-6 h-9 max-h-9 text-md [&>svg]:w-4.5 [&>svg]:h-4.5",
+      icon: "w-10 max-w-10 h-9 max-h-9 text-md justify-center [&>svg]:w-4.5 [&>svg]:h-4.5",
     },
     variant: {
       ghost:

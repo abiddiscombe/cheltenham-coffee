@@ -27,7 +27,10 @@ export async function GET(
       name: body.data.name,
       latitude: body.data.geometry.coordinates[1],
       longitude: body.data.geometry.coordinates[0],
+      tags: body.data.tags || [],
       metadata: {
+        website: body.data.metadata_website,
+        address: body.data.metadata_address,
         summary: body.data.metadata_summary,
       },
     },

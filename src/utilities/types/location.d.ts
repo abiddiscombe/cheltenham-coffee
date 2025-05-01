@@ -11,6 +11,7 @@ export interface Location {
 
 export interface LocationExtended extends Location {
   name: string;
+  tags: string[];
   metadata?: {
     summary?: string;
     website?: string;

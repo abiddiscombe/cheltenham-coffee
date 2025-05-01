@@ -10,6 +10,7 @@ export interface CmsDataEntry {
   geometry: {
     coordinates: [number, number];
   };
+  tags: string[];
 }
 
 export interface CmsResultSingle {

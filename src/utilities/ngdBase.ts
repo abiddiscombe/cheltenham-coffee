@@ -3,8 +3,8 @@ import { HOSTNAME, OS_ATTRIBUTION } from "./constants";
 import ngdBaseStyle from "./ngdBaseStyle.json" with { type: "json" };
 
 function parseTileUrl(path: string) {
-  const tls = !HOSTNAME?.includes("localhost");
-  const url = new URL(`${tls ? "https" : "http"}://${HOSTNAME}`);
+  const tls = !HOSTNAME?.includes("http://");
+  const url = new URL(`${tls ? "https://" : ""}${HOSTNAME}`);
   url.pathname = path;
 
   const tilePlaceholder = "/{z}/{y}/{x}";
@@ -17,8 +17,8 @@ function parseTileUrl(path: string) {
 export function getBasemapConfig(): StyleSpecification {
   const tileUrl = parseTileUrl("/api/tiles/vectors/{z}/{y}/{x}");
 
-  // Ordnance Survey Sprint and Glyph URLs don't require
-  // authentication, so our client can access them directly.
+  // Ordnance Survey sprite and glyphs don't require
+  // authentication - the client can access them directly.
   const spriteUrl =
     "https://api.os.uk/maps/vector/ngd/ota/v1/collections/ngd-base/styles/3857/sprites/sprite";
   const glyphsUrl =
