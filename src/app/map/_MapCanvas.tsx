@@ -9,13 +9,14 @@ import Pin from "./_Pin";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import {
   NUQS_KEYS,
+  TAG_TYPE_LOCAL,
+  TAG_TYPE_LOCAL_ID,
   TAG_HAS_WIFI,
   TAG_HAS_WIFI_ID,
   TAG_PERMITS_DOGS,
   TAG_PERMITS_DOGS_ID,
   TAG_PERMITS_LAPTOPS,
   TAG_PERMITS_LAPTOPS_ID,
-  TAG_TYPE_CHAIN_LOCAL,
 } from "@/utilities/constants";
 
 export default function MapCanvas() {
@@ -44,8 +45,8 @@ export default function MapCanvas() {
     }
 
     if (
-      filters.includes(TAG_TYPE_CHAIN_LOCAL) &&
-      !location.tags.includes(TAG_TYPE_CHAIN_LOCAL)
+      filters.includes(TAG_TYPE_LOCAL_ID) &&
+      !location.tags.includes(TAG_TYPE_LOCAL)
     ) {
       return false;
     }
