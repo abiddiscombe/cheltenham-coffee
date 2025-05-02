@@ -38,7 +38,7 @@ export function getBasemapConfig(): StyleSpecification {
         tiles: [tileUrl],
       },
     },
-    // @ts-ignore
+    // @ts-expect-error custom style document
     layers: ngdBaseStyle,
   };
 }

@@ -1,6 +1,6 @@
 "use client";
 import { useQueryState } from "nuqs";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BadgeAlertIcon, PanelLeftCloseIcon, XIcon } from "lucide-react";
 import OverlayPanelExp from "./_OverlayPanelExp";
 import OverlayPanelTags from "./_OverlayPanelTags";
@@ -29,7 +29,7 @@ export default function OverlayPanel() {
     return;
   }
 
-  async function getLocationDetails() {
+  const getLocationDetails = useCallback(async () => {
     setLocationInfoLoading(true);
     const res = await fetch(`/api/locations/${locationId}`);
 
@@ -42,7 +42,7 @@ export default function OverlayPanel() {
     const resJson = await res.json();
     setLocationInfo(resJson.location);
     setLocationInfoLoading(false);
-  }
+  }, [locationId, setLocationId]);
 
   useEffect(() => {
     if (locationId) {
@@ -55,7 +55,7 @@ export default function OverlayPanel() {
 
       setLocationInfo(undefined);
     };
-  }, [locationId]);
+  }, [locationId, getLocationDetails]);
 
   return (
     <div className="z-30 flex items-stretch pointer-events-none">
