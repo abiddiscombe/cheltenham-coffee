@@ -16,6 +16,7 @@ export async function GET() {
   const responseBody: { locations: Location[] } = {
     locations: body.data.map((location) => ({
       id: location.id,
+      tags: location.tags || [],
       latitude: location.geometry.coordinates[1],
       longitude: location.geometry.coordinates[0],
     })),

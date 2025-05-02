@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useQueryState } from "nuqs";
+import { useEffect, useState } from "react";
 import { BadgeAlertIcon, PanelLeftCloseIcon, XIcon } from "lucide-react";
-import OverlayPanelTags from "./_OverlayPanelTags";
 import OverlayPanelExp from "./_OverlayPanelExp";
+import OverlayPanelTags from "./_OverlayPanelTags";
 import { NUQS_KEYS } from "@/utilities/constants";
 import { LocationExtended } from "@/utilities/types/location";
 import Button from "@/components/Button";
@@ -58,7 +58,7 @@ export default function OverlayPanel() {
   }, [locationId]);
 
   return (
-    <div className="z-20 flex items-stretch pointer-events-none">
+    <div className="z-30 flex items-stretch pointer-events-none">
       {locationId && (
         <div className="bg-white/80 backdrop-blur-xs p-8 shadow border-r border-r-primary-200 w-full sm:w-sm pointer-events-auto h-full grid gap-6 grid-rows-[1fr_auto_auto]">
           {locationInfoLoading && !locationInfo ? (

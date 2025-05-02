@@ -17,7 +17,7 @@ export default function OverlayPanelTags(p: { tags: undefined | string[] }) {
 
   function Tag(p: { icon: React.ReactNode; label: string }) {
     return (
-      <li className="min-h-8 flex items-start gap-4 [&>svg]:mt-1.5 [&>svg]:h-3.5 [&>svg]:w-3.5 [&>svg]:text-primary-600 [&>p]:last-of-type:m-0 [&>p]:m-0">
+      <li className="min-h-8 flex items-center gap-4 [&>svg]:h-4.5 [&>svg]:w-4.5 [&>svg]:text-primary-600 [&>p]:last-of-type:m-0 [&>p]:m-0">
         {p.icon}
         <Typography variant="body">{p.label}</Typography>
       </li>

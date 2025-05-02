@@ -5,13 +5,13 @@ import { type UUID } from "crypto";
 
 export interface Location {
   id: UUID;
+  tags: string[];
   latitude: number;
   longitude: number;
 }
 
 export interface LocationExtended extends Location {
   name: string;
-  tags: string[];
   metadata?: {
     summary?: string;
     website?: string;

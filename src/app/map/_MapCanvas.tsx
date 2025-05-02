@@ -6,8 +6,24 @@ import { Map } from "@vis.gl/react-maplibre";
 import { getBasemapConfig } from "@/utilities/ngdBase";
 import { type Location } from "@/utilities/types/location";
 import Pin from "./_Pin";
+import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
+import {
+  NUQS_KEYS,
+  TAG_HAS_WIFI,
+  TAG_HAS_WIFI_ID,
+  TAG_PERMITS_DOGS,
+  TAG_PERMITS_DOGS_ID,
+  TAG_PERMITS_LAPTOPS,
+  TAG_PERMITS_LAPTOPS_ID,
+  TAG_TYPE_CHAIN_LOCAL,
+} from "@/utilities/constants";
 
 export default function MapCanvas() {
+  const [filters] = useQueryState(
+    NUQS_KEYS.FILTERS,
+    parseAsArrayOf(parseAsString),
+  );
+
   const [locations, setLocations] = useState<Location[]>([]);
 
   async function getLocations() {
@@ -22,8 +38,43 @@ export default function MapCanvas() {
     setLocations(resJson.locations);
   }
 
+  function filterLocationVisibility(location: Location) {
+    if (!filters?.length) {
+      return true;
+    }
+
+    if (
+      filters.includes(TAG_TYPE_CHAIN_LOCAL) &&
+      !location.tags.includes(TAG_TYPE_CHAIN_LOCAL)
+    ) {
+      return false;
+    }
+
+    if (
+      filters.includes(TAG_HAS_WIFI_ID) &&
+      !location.tags.includes(TAG_HAS_WIFI)
+    ) {
+      return false;
+    }
+
+    if (
+      filters.includes(TAG_PERMITS_DOGS_ID) &&
+      !location.tags.includes(TAG_PERMITS_DOGS)
+    ) {
+      return false;
+    }
+
+    if (
+      filters.includes(TAG_PERMITS_LAPTOPS_ID) &&
+      !location.tags.includes(TAG_PERMITS_LAPTOPS)
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
   useEffect(() => {
-    // Fetch location data from the backend.
     getLocations();
   }, []);
 
@@ -37,13 +88,8 @@ export default function MapCanvas() {
       initialViewState={{ zoom: 12, latitude: 51.900091, longitude: -2.076931 }}
       style={{ gridRow: 1, gridColumn: 1, zIndex: 0 }}
     >
-      {locations.map((location) => (
-        <Pin
-          id={location.id}
-          key={location.id}
-          latitude={location.latitude}
-          longitude={location.longitude}
-        />
+      {locations.filter(filterLocationVisibility).map((location) => (
+        <Pin key={location.id} {...location} />
       ))}
     </Map>
   );
