@@ -24,6 +24,11 @@ export default function OverlayPanel() {
     setLocationId(null);
   }
 
+  function handleGiveFeedback() {
+    // @todo: Add feedback modal.
+    return;
+  }
+
   async function getLocationDetails() {
     setLocationInfoLoading(true);
     const res = await fetch(`/api/locations/${locationId}`);
@@ -55,57 +60,52 @@ export default function OverlayPanel() {
   return (
     <div className="z-20 flex items-stretch pointer-events-none">
       {locationId && (
-        <div className="bg-white/80 backdrop-blur-xs p-8 shadow border-r border-r-primary-200 w-full sm:w-sm pointer-events-auto">
+        <div className="bg-white/80 backdrop-blur-xs p-8 shadow border-r border-r-primary-200 w-full sm:w-sm pointer-events-auto h-full grid gap-6 grid-rows-[1fr_auto_auto]">
           {locationInfoLoading && !locationInfo ? (
             <div className="h-full grid place-items-center">
               <Spinner />
             </div>
           ) : (
-            <div className="h-full grid gap-6 grid-rows-[1fr_auto_auto]">
-              <div>
-                <div className="mb-4 flex items-start justify-between">
-                  <Typography variant="h2" className="mb-0">
-                    {locationInfo?.name}
-                  </Typography>
-                  <Button
-                    size="icon"
-                    onClick={handleClose}
-                    aria-label="Close Side Panel"
-                    className="flex sm:hidden"
-                  >
-                    <XIcon />
-                  </Button>
-                </div>
-                {locationInfo?.metadata?.summary && (
-                  <Typography variant="body">
-                    {locationInfo?.metadata?.summary}
-                  </Typography>
-                )}
-                <OverlayPanelExp metadata={locationInfo?.metadata} />
-                <OverlayPanelTags tags={locationInfo?.tags} />
-              </div>
-              <div>
-                <Banner variant="warning">
-                  This app is a work in progress and some data may be
-                  inaccurate.
-                </Banner>
-              </div>
-              <div className="flex items-center gap-2">
-                <Button className="grow">
-                  <BadgeAlertIcon />
-                  Feedback
-                </Button>
+            <div>
+              <div className="mb-4 flex items-start justify-between">
+                <Typography variant="h2" className="mb-0">
+                  {locationInfo?.name}
+                </Typography>
                 <Button
                   size="icon"
                   onClick={handleClose}
                   aria-label="Close Side Panel"
-                  className="hidden sm:flex"
+                  className="flex sm:hidden"
                 >
-                  <PanelLeftCloseIcon />
+                  <XIcon />
                 </Button>
               </div>
+              {locationInfo?.metadata?.summary && (
+                <Typography variant="body">
+                  {locationInfo?.metadata?.summary}
+                </Typography>
+              )}
+              <OverlayPanelExp metadata={locationInfo?.metadata} />
+              <OverlayPanelTags tags={locationInfo?.tags} />
             </div>
           )}
+          <Banner variant="warning">
+            This app is a work in progress and some data may be inaccurate.
+          </Banner>
+          <div className="flex items-center gap-2">
+            <Button className="grow" onClick={handleGiveFeedback}>
+              <BadgeAlertIcon />
+              Feedback
+            </Button>
+            <Button
+              size="icon"
+              onClick={handleClose}
+              aria-label="Close Side Panel"
+              className="hidden sm:flex"
+            >
+              <PanelLeftCloseIcon />
+            </Button>
+          </div>
         </div>
       )}
     </div>
