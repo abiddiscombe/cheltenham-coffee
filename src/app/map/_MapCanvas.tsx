@@ -9,14 +9,10 @@ import Pin from "./_Pin";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import {
   NUQS_KEYS,
-  TAG_TYPE_LOCAL,
-  TAG_TYPE_LOCAL_ID,
   TAG_HAS_WIFI,
-  TAG_HAS_WIFI_ID,
   TAG_PERMITS_DOGS,
-  TAG_PERMITS_DOGS_ID,
+  TAG_IS_INDEPENDENT,
   TAG_PERMITS_LAPTOPS,
-  TAG_PERMITS_LAPTOPS_ID,
 } from "@/utilities/constants";
 
 export default function MapCanvas() {
@@ -45,28 +41,28 @@ export default function MapCanvas() {
     }
 
     if (
-      filters.includes(TAG_TYPE_LOCAL_ID) &&
-      !location.tags.includes(TAG_TYPE_LOCAL)
+      filters.includes(TAG_IS_INDEPENDENT) &&
+      !location.tags.includes(TAG_IS_INDEPENDENT)
     ) {
       return false;
     }
 
     if (
-      filters.includes(TAG_HAS_WIFI_ID) &&
+      filters.includes(TAG_HAS_WIFI) &&
       !location.tags.includes(TAG_HAS_WIFI)
     ) {
       return false;
     }
 
     if (
-      filters.includes(TAG_PERMITS_DOGS_ID) &&
+      filters.includes(TAG_PERMITS_DOGS) &&
       !location.tags.includes(TAG_PERMITS_DOGS)
     ) {
       return false;
     }
 
     if (
-      filters.includes(TAG_PERMITS_LAPTOPS_ID) &&
+      filters.includes(TAG_PERMITS_LAPTOPS) &&
       !location.tags.includes(TAG_PERMITS_LAPTOPS)
     ) {
       return false;

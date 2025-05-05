@@ -3,10 +3,10 @@ import { useQueryState, parseAsArrayOf, parseAsString } from "nuqs";
 import { LaptopIcon, PawPrintIcon, StoreIcon, WifiIcon } from "lucide-react";
 import {
   NUQS_KEYS,
-  TAG_HAS_WIFI_ID,
-  TAG_PERMITS_DOGS_ID,
-  TAG_PERMITS_LAPTOPS_ID,
-  TAG_TYPE_LOCAL_ID,
+  TAG_HAS_WIFI,
+  TAG_PERMITS_DOGS,
+  TAG_IS_INDEPENDENT,
+  TAG_PERMITS_LAPTOPS,
 } from "@/utilities/constants";
 import Button from "@/components/Button";
 import { usePathname } from "next/navigation";
@@ -34,25 +34,25 @@ export default function HeaderFilters() {
 
   const filters = [
     {
-      id: TAG_TYPE_LOCAL_ID,
+      id: TAG_IS_INDEPENDENT,
       icon: <StoreIcon />,
       label: "Independent",
       className: "rounded-r-none",
     },
     {
-      id: TAG_HAS_WIFI_ID,
+      id: TAG_HAS_WIFI,
       icon: <WifiIcon />,
       label: "Customer Wi-Fi",
       className: "rounded-none",
     },
     {
-      id: TAG_PERMITS_DOGS_ID,
+      id: TAG_PERMITS_DOGS,
       icon: <PawPrintIcon />,
       label: "Permits Dogs",
       className: "rounded-none",
     },
     {
-      id: TAG_PERMITS_LAPTOPS_ID,
+      id: TAG_PERMITS_LAPTOPS,
       icon: <LaptopIcon />,
       label: "Permits Laptops",
       className: "rounded-l-none",

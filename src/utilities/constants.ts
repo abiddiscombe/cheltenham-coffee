@@ -8,20 +8,10 @@ export const NUQS_KEYS = {
 };
 
 // Unique Location Tags
-export const TAG_TYPE_LOCAL = "typeLocal";
-export const TAG_TYPE_CHAIN_LOCAL = "typeChainLocal";
-export const TAG_TYPE_CHAIN_NATIONAL = "typeChainNational";
-export const TAG_HAS_WIFI = "hasWifi";
-export const TAG_PERMITS_DOGS = "permitsDogs";
-export const TAG_PERMITS_LAPTOPS = "permitsLaptops";
-
-// Unique Location Tags (Shorthand)
-export const TAG_TYPE_LOCAL_ID = "tl";
-export const TAG_TYPE_CHAIN_LOCAL_ID = "tcl";
-export const TAG_TYPE_CHAIN_NATIONAL_ID = "tcn";
-export const TAG_HAS_WIFI_ID = "hw";
-export const TAG_PERMITS_DOGS_ID = "pd";
-export const TAG_PERMITS_LAPTOPS_ID = "pl";
+export const TAG_HAS_WIFI = "has-wifi";
+export const TAG_PERMITS_DOGS = "permits-dogs";
+export const TAG_IS_INDEPENDENT = "is-independent";
+export const TAG_PERMITS_LAPTOPS = "permits-laptops";
 
 // Ordnance Survey APIs
 export const HOSTNAME = process.env["NEXT_PUBLIC_HOSTNAME"] ?? "";

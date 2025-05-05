@@ -2,10 +2,8 @@ import { LaptopIcon, PawPrintIcon, StoreIcon, WifiIcon } from "lucide-react";
 import {
   TAG_HAS_WIFI,
   TAG_PERMITS_DOGS,
+  TAG_IS_INDEPENDENT,
   TAG_PERMITS_LAPTOPS,
-  TAG_TYPE_CHAIN_LOCAL,
-  TAG_TYPE_CHAIN_NATIONAL,
-  TAG_TYPE_LOCAL,
 } from "@/utilities/constants";
 import Divider from "@/components/Divider";
 import Typography from "@/components/Typography";
@@ -28,14 +26,8 @@ export default function MapOverlayTags(p: { tags: undefined | string[] }) {
     <>
       <Divider />
       <ul>
-        {p.tags.includes(TAG_TYPE_LOCAL) && (
+        {p.tags.includes(TAG_IS_INDEPENDENT) && (
           <Tag icon={<StoreIcon />} label="Independent" />
-        )}
-        {p.tags.includes(TAG_TYPE_CHAIN_LOCAL) && (
-          <Tag icon={<StoreIcon />} label="Chain (Local)" />
-        )}
-        {p.tags.includes(TAG_TYPE_CHAIN_NATIONAL) && (
-          <Tag icon={<StoreIcon />} label="Chain (National)" />
         )}
         {p.tags.includes(TAG_HAS_WIFI) && (
           <Tag icon={<WifiIcon />} label="Customer Wi-Fi" />
