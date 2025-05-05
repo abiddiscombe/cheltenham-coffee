@@ -10,7 +10,7 @@ import {
 import Divider from "@/components/Divider";
 import Typography from "@/components/Typography";
 
-export default function OverlayPanelTags(p: { tags: undefined | string[] }) {
+export default function MapOverlayTags(p: { tags: undefined | string[] }) {
   if (!p.tags || p.tags.length === 0) {
     return null;
   }

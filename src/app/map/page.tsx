@@ -1,13 +1,14 @@
-import FilterMenu from "./_FilterMenu";
+import { Suspense } from "react";
 import MapCanvas from "./_MapCanvas";
-import OverlayPanel from "./_OverlayPanel";
+import MapOverlay from "./_MapOverlay";
 
 export default function Page() {
   return (
-    <div className="h-full grid grid-rows-1 grid-cols-1 [&>*]:row-1 [&>*]:col-1">
-      <MapCanvas />
-      <FilterMenu />
-      <OverlayPanel />
-    </div>
+    <Suspense>
+      <div className="h-full grid grid-rows-1 grid-cols-1 [&>*]:row-1 [&>*]:col-1">
+        <MapCanvas />
+        <MapOverlay />
+      </div>
+    </Suspense>
   );
 }
