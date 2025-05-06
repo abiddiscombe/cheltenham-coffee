@@ -4,8 +4,9 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import Header from "./_Header";
 
 export const metadata: Metadata = {
-  title: "Cheltenham Coffee Map",
-  description: "Cheltenham Coffee Map",
+  title: "Cheltenham Coffee",
+  description:
+    "A filterable map of coffee shops in Cheltenham (Gloucestershire, UK).",
 };
 
 export const viewport: Viewport = {

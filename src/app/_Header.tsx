@@ -6,7 +6,7 @@ export default function Header() {
     <header className="bg-white border-b border-b-primary-200 px-8 py-0.5">
       <div className="min-h-12 flex gap-4 items-center justify-between">
         <Typography variant="h1" className="grow">
-          Cheltenham Coffee Map
+          Cheltenham Coffee
         </Typography>
         <HeaderOverview />
       </div>
