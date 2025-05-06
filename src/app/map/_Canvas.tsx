@@ -5,17 +5,17 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { Map } from "@vis.gl/react-maplibre";
 import { getBasemapConfig } from "@/utilities/ngdBase";
 import { type Location } from "@/utilities/types/location";
-import Pin from "./_Pin";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import {
   NUQS_KEYS,
-  TAG_HAS_WIFI,
-  TAG_PERMITS_DOGS,
-  TAG_IS_INDEPENDENT,
-  TAG_PERMITS_LAPTOPS,
+  TAG_INDEPENDENT,
+  TAG_CUSTOMER_WIFI,
+  TAG_DOGS_PERMITTED,
+  TAG_LAPTOPS_PERMITTED,
 } from "@/utilities/constants";
+import Pin from "./_Pin";
 
-export default function MapCanvas() {
+export default function Canvas() {
   const [filters] = useQueryState(
     NUQS_KEYS.FILTERS,
     parseAsArrayOf(parseAsString),
@@ -41,29 +41,29 @@ export default function MapCanvas() {
     }
 
     if (
-      filters.includes(TAG_IS_INDEPENDENT) &&
-      !location.tags.includes(TAG_IS_INDEPENDENT)
+      filters.includes(TAG_INDEPENDENT) &&
+      !location.tags.includes(TAG_INDEPENDENT)
     ) {
       return false;
     }
 
     if (
-      filters.includes(TAG_HAS_WIFI) &&
-      !location.tags.includes(TAG_HAS_WIFI)
+      filters.includes(TAG_CUSTOMER_WIFI) &&
+      !location.tags.includes(TAG_CUSTOMER_WIFI)
     ) {
       return false;
     }
 
     if (
-      filters.includes(TAG_PERMITS_DOGS) &&
-      !location.tags.includes(TAG_PERMITS_DOGS)
+      filters.includes(TAG_DOGS_PERMITTED) &&
+      !location.tags.includes(TAG_DOGS_PERMITTED)
     ) {
       return false;
     }
 
     if (
-      filters.includes(TAG_PERMITS_LAPTOPS) &&
-      !location.tags.includes(TAG_PERMITS_LAPTOPS)
+      filters.includes(TAG_LAPTOPS_PERMITTED) &&
+      !location.tags.includes(TAG_LAPTOPS_PERMITTED)
     ) {
       return false;
     }

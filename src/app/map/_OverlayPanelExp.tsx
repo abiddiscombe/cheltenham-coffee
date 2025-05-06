@@ -2,7 +2,7 @@ import { LinkIcon, MapPinIcon } from "lucide-react";
 import Typography from "@/components/Typography";
 import ExternalLink from "@/components/ExternalLink";
 
-export default function MapOverlayExp(p: {
+export default function OverlayPanelExp(p: {
   metadata: { [key: string]: string } | undefined;
 }) {
   if (!p.metadata) {

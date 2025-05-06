@@ -6,8 +6,8 @@ const cvaButton = cva(
   {
     variants: {
       size: {
-        text: "gap-3 px-4 h-9 max-h-9 text-md [&>svg]:w-4 [&>svg]:h-4",
-        icon: "w-10 max-w-10 h-9 max-h-9 text-md justify-center [&>svg]:w-4 [&>svg]:h-4",
+        text: "gap-3 px-4 h-9 max-h-9 [&>svg]:w-4 [&>svg]:h-4",
+        icon: "w-10 max-w-10 h-9 max-h-9 justify-center [&>svg]:w-4 [&>svg]:h-4",
       },
       variant: {
         ghost:

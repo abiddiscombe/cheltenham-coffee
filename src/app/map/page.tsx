@@ -1,13 +1,17 @@
 import { Suspense } from "react";
-import MapCanvas from "./_MapCanvas";
-import MapOverlay from "./_MapOverlay";
+import Canvas from "./_Canvas";
+import OverlayNav from "./_OverlayNav";
+import OverlayPanel from "./_OverlayPanel";
 
 export default function Page() {
   return (
     <Suspense>
       <div className="h-full grid grid-rows-1 grid-cols-1 [&>*]:row-1 [&>*]:col-1">
-        <MapCanvas />
-        <MapOverlay />
+        <Canvas />
+        <div className="z-20 pointer-events-none [&>*]:pointer-events-auto">
+          <OverlayNav />
+          <OverlayPanel />
+        </div>
       </div>
     </Suspense>
   );

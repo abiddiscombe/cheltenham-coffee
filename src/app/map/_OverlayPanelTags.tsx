@@ -1,14 +1,14 @@
 import { LaptopIcon, PawPrintIcon, StoreIcon, WifiIcon } from "lucide-react";
 import {
-  TAG_HAS_WIFI,
-  TAG_PERMITS_DOGS,
-  TAG_IS_INDEPENDENT,
-  TAG_PERMITS_LAPTOPS,
+  TAG_CUSTOMER_WIFI,
+  TAG_DOGS_PERMITTED,
+  TAG_INDEPENDENT,
+  TAG_LAPTOPS_PERMITTED,
 } from "@/utilities/constants";
 import Divider from "@/components/Divider";
 import Typography from "@/components/Typography";
 
-export default function MapOverlayTags(p: { tags: undefined | string[] }) {
+export default function OverlayPanelTags(p: { tags: undefined | string[] }) {
   if (!p.tags || p.tags.length === 0) {
     return null;
   }
@@ -26,16 +26,16 @@ export default function MapOverlayTags(p: { tags: undefined | string[] }) {
     <>
       <Divider />
       <ul>
-        {p.tags.includes(TAG_IS_INDEPENDENT) && (
+        {p.tags.includes(TAG_INDEPENDENT) && (
           <Tag icon={<StoreIcon />} label="Independent" />
         )}
-        {p.tags.includes(TAG_HAS_WIFI) && (
-          <Tag icon={<WifiIcon />} label="Customer Wi-Fi" />
+        {p.tags.includes(TAG_CUSTOMER_WIFI) && (
+          <Tag icon={<WifiIcon />} label="Wi-Fi" />
         )}
-        {p.tags.includes(TAG_PERMITS_DOGS) && (
+        {p.tags.includes(TAG_DOGS_PERMITTED) && (
           <Tag icon={<PawPrintIcon />} label="Permits Dogs" />
         )}
-        {p.tags.includes(TAG_PERMITS_LAPTOPS) && (
+        {p.tags.includes(TAG_LAPTOPS_PERMITTED) && (
           <Tag icon={<LaptopIcon />} label="Permits Laptops" />
         )}
       </ul>
