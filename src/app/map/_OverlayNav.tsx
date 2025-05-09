@@ -52,7 +52,7 @@ export default function OverlayNav() {
   ];
 
   return (
-    <nav className="z-50 shadow-sm bg-white/80 backdrop-blur-sm border-b border-b-primary-200 px-8 py-2 flex gap-4 items-center overflow-x-auto scrollbar-none">
+    <nav className="z-50 shadow-sm bg-white/80 backdrop-blur-xs border-b border-b-primary-200 px-4 sm:px-6 py-2 flex gap-4 items-center overflow-x-auto scrollbar-none">
       {filters?.map((filter) => {
         const isActive = activeFilters?.includes(filter.id);
 

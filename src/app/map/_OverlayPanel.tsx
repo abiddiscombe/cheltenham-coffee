@@ -64,7 +64,7 @@ export default function OverlayPanel() {
   }
 
   return (
-    <Surface className="m-4 min-h-64 max-w-sm p-8 bg-white/80 backdrop-blur-sm grid place-items-center">
+    <Surface className="m-4 min-h-64 max-w-sm p-8 bg-white/90 backdrop-blur-xs grid place-items-center">
       {locationInfoLoading ? (
         <OverlayPanelLoading />
       ) : (
