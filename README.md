@@ -15,8 +15,11 @@ A web map of coffee shops in Cheltenham (United Kingdom), ~~with support for loc
 
 ### Environment Variables
 
-`NEXT_PUBLIC_HOSTNAME` \
+`NEXT_PUBLIC_HOST` \
 [ Required ] The public hostname of the server; MapLibre requires the hostname in order to accessing tile data from the backend proxy. For local development this is usually `localhost:3000` or your machine's IP address if testing on a mobile device.
+
+`NEXT_PUBLIC_HOST_INSECURE` \
+[ Optional - Dev Only ] Whether MapLibre should get tile data from the API proxy **without SSL protection**. This is only designed for local development.
 
 `NEXT_PRIVATE_CMS_HOST` \
 [ Required ] The hostname of the CMS service instance.

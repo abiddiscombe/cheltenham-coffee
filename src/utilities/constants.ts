@@ -27,13 +27,16 @@ export const TAG_DOGS_PERMITTED_ICON = PawPrintIcon;
 export const TAG_LAPTOPS_PERMITTED = "laptops-permitted";
 export const TAG_LAPTOPS_PERMITTED_ICON = LaptopIcon;
 
+// Server Host (MapLibre Tile Source)
+export const HOST = process.env["NEXT_PUBLIC_HOST"]!;
+export const HOST_INSECURE = process.env["NEXT_PUBLIC_HOST_INSECURE"]!;
+
 // Ordnance Survey APIs
-export const HOSTNAME = process.env["NEXT_PUBLIC_HOSTNAME"] ?? "";
-export const OS_API_KEY = process.env["NEXT_PRIVATE_OS_API_KEY"] ?? "";
+export const OS_API_KEY = process.env["NEXT_PRIVATE_OS_API_KEY"]!;
 export const OS_ATTRIBUTION =
   "Contains Ordnance Survey data © Crown copyright. Use of this data is subject to terms and conditions.";
 
 // CMS - Directus
-export const CMS_HOST = process.env["NEXT_PRIVATE_CMS_HOST"] ?? "";
-export const CMS_TOKEN = process.env["NEXT_PRIVATE_CMS_TOKEN"] ?? "";
-export const CMS_COLLECTION = process.env["NEXT_PRIVATE_CMS_COLLECTION"] ?? "";
+export const CMS_HOST = process.env["NEXT_PRIVATE_CMS_HOST"]!;
+export const CMS_TOKEN = process.env["NEXT_PRIVATE_CMS_TOKEN"]!;
+export const CMS_COLLECTION = process.env["NEXT_PRIVATE_CMS_COLLECTION"]!;

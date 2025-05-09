@@ -1,21 +1,16 @@
 import { type StyleSpecification } from "maplibre-gl";
-import { HOSTNAME, OS_ATTRIBUTION } from "./constants";
+import { HOST, HOST_INSECURE, OS_ATTRIBUTION } from "./constants";
 import ngdBaseStyle from "./ngdBaseStyle.json" with { type: "json" };
 
-function parseTileUrl(path: string) {
-  const tls = !HOSTNAME?.includes("http://");
-  const url = new URL(`${tls ? "https://" : ""}${HOSTNAME}`);
-  url.pathname = path;
+function parseTileUrl() {
+  const proto = Boolean(HOST_INSECURE) ? "http" : "https";
+  const pathname = "api/tiles/vectors/{z}/{y}/{x}";
 
-  const tilePlaceholder = "/{z}/{y}/{x}";
-  const tileEncodedPlaceholder = "/%7Bz%7D/%7By%7D/%7Bx%7D";
-
-  // MapLibre intercepts a non-URL-encoded tile placeholder.
-  return url.toString().replace(tileEncodedPlaceholder, tilePlaceholder);
+  return `${proto}://${HOST}/${pathname}`;
 }
 
 export function getBasemapConfig(): StyleSpecification {
-  const tileUrl = parseTileUrl("/api/tiles/vectors/{z}/{y}/{x}");
+  const tileUrl = parseTileUrl();
 
   // Ordnance Survey sprite and glyphs don't require
   // authentication - the client can access them directly.
