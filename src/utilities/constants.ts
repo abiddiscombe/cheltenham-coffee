@@ -27,9 +27,8 @@ export const TAG_DOGS_PERMITTED_ICON = PawPrintIcon;
 export const TAG_LAPTOPS_PERMITTED = "laptops-permitted";
 export const TAG_LAPTOPS_PERMITTED_ICON = LaptopIcon;
 
-// Server Host (MapLibre Tile Source)
-export const HOST = process.env["NEXT_PUBLIC_HOST"]!;
-export const HOST_INSECURE = process.env["NEXT_PUBLIC_HOST_INSECURE"]!;
+// App Origin (Required for MapLibre Tile Source)
+export const APP_ORIGIN = process.env["NEXT_PUBLIC_APP_ORIGIN"]!;
 
 // Ordnance Survey APIs
 export const OS_API_KEY = process.env["NEXT_PRIVATE_OS_API_KEY"]!;

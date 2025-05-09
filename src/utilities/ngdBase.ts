@@ -1,16 +1,9 @@
 import { type StyleSpecification } from "maplibre-gl";
-import { HOST, HOST_INSECURE, OS_ATTRIBUTION } from "./constants";
+import { APP_ORIGIN, OS_ATTRIBUTION } from "./constants";
 import ngdBaseStyle from "./ngdBaseStyle.json" with { type: "json" };
 
-function parseTileUrl() {
-  const proto = Boolean(HOST_INSECURE) ? "http" : "https";
-  const pathname = "api/tiles/vectors/{z}/{y}/{x}";
-
-  return `${proto}://${HOST}/${pathname}`;
-}
-
 export function getBasemapConfig(): StyleSpecification {
-  const tileUrl = parseTileUrl();
+  const tileUrl = `${APP_ORIGIN}/api/tiles/vectors/{z}/{y}/{x}`;
 
   // Ordnance Survey sprite and glyphs don't require
   // authentication - the client can access them directly.
