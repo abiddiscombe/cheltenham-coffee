@@ -1,55 +1,54 @@
 "use client";
 import { useQueryState } from "nuqs";
 import { useCallback, useEffect, useState } from "react";
+import { XIcon, LinkIcon, MapPinIcon } from "lucide-react";
 import {
-  InfoIcon,
-  Share2Icon,
-  SidebarCloseIcon,
-  SidebarIcon,
-} from "lucide-react";
-import { NUQS_KEYS } from "@/utilities/constants";
+  NUQS_KEYS,
+  TAG_CUSTOMER_WIFI,
+  TAG_DOGS_PERMITTED,
+  TAG_INDEPENDENT,
+  TAG_LAPTOPS_PERMITTED,
+} from "@/utilities/constants";
 import { LocationExtended } from "@/utilities/types/location";
 import Button from "@/components/Button";
-import Banner from "@/components/Banner";
 import Surface from "@/components/Surface";
-import Spinner from "@/components/Spinner";
 import Typography from "@/components/Typography";
-import OverlayPanelExp from "./_OverlayPanelExp";
-import OverlayPanelTags from "./_OverlayPanelTags";
+import ExternalLink from "@/components/ExternalLink";
+import DescriptionList from "@/components/DescriptionList";
+import DescriptionListEntry from "@/components/DescriptionListEntry";
+import OverlayPanelError from "./_OverlayPanelError";
+import OverlayPanelLoading from "./_OverlayPanelLoading";
 
 export default function OverlayPanel() {
-  const [locationId, setLocationId] = useQueryState(NUQS_KEYS.SELECTED);
-
+  const [location, setLocation] = useQueryState(NUQS_KEYS.LOCATION_ID);
   const [locationInfo, setLocationInfo] = useState<LocationExtended>();
-  const [locationInfoLoading, setLocationInfoLoading] = useState(false);
+  const [locationInfoError, setLocationInfoError] = useState(false);
+  const [locationInfoLoading, setLocationInfoLoading] = useState(true);
 
-  function handleClose() {
-    setLocationId(null);
+  function handleClosePanel() {
+    setLocation(null);
   }
 
-  function handleGiveFeedback() {
-    // @todo: Add feedback modal.
-    return;
-  }
-
-  const getLocationDetails = useCallback(async () => {
+  const getDetails = useCallback(async () => {
+    setLocationInfoError(false);
     setLocationInfoLoading(true);
-    const res = await fetch(`/api/locations/${locationId}`);
+    const res = await fetch(`/api/locations/${location}`);
 
     if (res.status !== 200) {
-      console.error(`Failed to GET '/api/locations/${locationId}'`);
-      setLocationId(null);
+      console.warn(`Failed to GET '/api/locations/${location}'`);
+      setLocationInfoError(true);
+      setLocationInfoLoading(false);
       return;
     }
 
     const resJson = await res.json();
     setLocationInfo(resJson.location);
     setLocationInfoLoading(false);
-  }, [locationId, setLocationId]);
+  }, [location]);
 
   useEffect(() => {
-    if (locationId) {
-      getLocationDetails();
+    if (location) {
+      getDetails();
     }
 
     return () => {
@@ -58,54 +57,102 @@ export default function OverlayPanel() {
 
       setLocationInfo(undefined);
     };
-  }, [locationId, getLocationDetails]);
+  }, [location, getDetails]);
 
-  if (!locationId) {
+  if (!location) {
     return null;
   }
 
   return (
-    <Surface className="m-4 p-6 bg-white/80 max-w-sm backdrop-blur-sm">
-      <Button
-        size="icon"
-        onClick={handleClose}
-        aria-label="Close Panel"
-        className="mb-6"
-      >
-        {locationId ? <SidebarCloseIcon /> : <SidebarIcon />}
-      </Button>
-      {locationInfoLoading && !locationInfo ? (
-        <div className="h-full grid place-items-center">
-          <Spinner />
-        </div>
+    <Surface className="m-4 min-h-64 max-w-sm p-8 bg-white/80 backdrop-blur-sm grid place-items-center">
+      {locationInfoLoading ? (
+        <OverlayPanelLoading />
       ) : (
         <>
-          <div className="mb-4 flex items-start justify-between">
-            <Typography variant="h2" className="mb-0">
-              {locationInfo?.name}
-            </Typography>
-          </div>
-          {locationInfo?.metadata?.summary && (
-            <Typography variant="body">
-              {locationInfo?.metadata?.summary}
-            </Typography>
+          {locationInfoError ? (
+            <OverlayPanelError
+              handleRetry={getDetails}
+              handleCancel={handleClosePanel}
+            />
+          ) : (
+            <div className="h-full w-full">
+              <div className="mb-4 flex items-start gap-2 justify-between">
+                <Typography variant="h2" className="mt-1.5 mb-0">
+                  {locationInfo?.name}
+                </Typography>
+                <Button size="icon" variant="ghost" onClick={handleClosePanel}>
+                  <XIcon />
+                </Button>
+              </div>
+
+              <Typography variant="body">
+                A
+                {locationInfo?.tags.includes(TAG_INDEPENDENT)
+                  ? "n independent"
+                  : " chain"}{" "}
+                coffee shop
+                {(locationInfo?.tags.includes(TAG_CUSTOMER_WIFI) ||
+                  locationInfo?.tags.includes(TAG_LAPTOPS_PERMITTED)) &&
+                  ", with "}
+                {[
+                  ...(locationInfo?.tags.includes(TAG_CUSTOMER_WIFI)
+                    ? ["customer Wi-Fi"]
+                    : []),
+                  ...(locationInfo?.tags.includes(TAG_LAPTOPS_PERMITTED)
+                    ? ["support for laptops"]
+                    : []),
+                ].join(" and ")}
+                .
+                {locationInfo?.tags.includes(TAG_DOGS_PERMITTED) &&
+                  ` Well-behaved dogs are ${
+                    locationInfo?.tags.includes(TAG_CUSTOMER_WIFI) ||
+                    locationInfo?.tags.includes(TAG_LAPTOPS_PERMITTED)
+                      ? "also "
+                      : ""
+                  }welcome!`}
+              </Typography>
+
+              <DescriptionList>
+                {locationInfo?.metadata?.website && (
+                  <DescriptionListEntry
+                    icon={<LinkIcon />}
+                    name="Website"
+                    summary={
+                      <ExternalLink
+                        href={`https://${locationInfo.metadata.website}`}
+                      >
+                        {locationInfo.metadata.website.replace("www.", "")}
+                      </ExternalLink>
+                    }
+                  />
+                )}
+                {locationInfo?.metadata?.address && (
+                  <DescriptionListEntry
+                    icon={<MapPinIcon />}
+                    name="Directions"
+                    summary={
+                      <>
+                        Directions: &ensp;
+                        <ExternalLink
+                          href={`https://maps.apple.com/directions?destination=${locationInfo?.metadata.address}`}
+                        >
+                          Apple
+                        </ExternalLink>
+                        &ensp;|&ensp;
+                        <ExternalLink
+                          href={`https://google.com/maps/dir//${locationInfo.metadata.address}`}
+                        >
+                          Google
+                        </ExternalLink>
+                      </>
+                    }
+                  />
+                )}
+              </DescriptionList>
+            </div>
           )}
-          <OverlayPanelExp metadata={locationInfo?.metadata} />
-          <OverlayPanelTags tags={locationInfo?.tags} />
-          <div className="mt-6 flex gap-2 items-center">
-            <Button onClick={handleGiveFeedback} className="grow">
-              <InfoIcon />
-              Suggest Feedback
-            </Button>
-            <Button size="icon">
-              <Share2Icon />
-            </Button>
-          </div>
         </>
       )}
-      <Banner variant="warning" className="mt-4">
-        This app is a work in progress and some data may be inaccurate.
-      </Banner>
     </Surface>
   );
 }

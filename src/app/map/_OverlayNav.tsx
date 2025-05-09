@@ -52,29 +52,27 @@ export default function OverlayNav() {
   ];
 
   return (
-    <nav className="z-50 shadow-sm bg-white/80 backdrop-blur-sm border-b border-b-primary-200 px-8 py-2">
-      <div className="flex gap-4 items-center">
-        {filters?.map((filter) => {
-          const isActive = activeFilters?.includes(filter.id);
+    <nav className="z-50 shadow-sm bg-white/80 backdrop-blur-sm border-b border-b-primary-200 px-8 py-2 flex gap-4 items-center overflow-x-auto scrollbar-none">
+      {filters?.map((filter) => {
+        const isActive = activeFilters?.includes(filter.id);
 
-          return (
-            <Button
-              key={filter.id}
-              role="checkbox"
-              aria-checked={isActive}
-              onClick={() => setFilter(filter.id)}
-              className={[
-                "rounded-full h-8 min-h-8 shadow-xs text-sm bg-white",
-                isActive &&
-                  "bg-green-100 text-green-800 not:hover:border-green-200",
-              ].join(" ")}
-            >
-              {filter.icon}
-              {filter.label}
-            </Button>
-          );
-        })}
-      </div>
+        return (
+          <Button
+            key={filter.id}
+            role="checkbox"
+            aria-checked={isActive}
+            onClick={() => setFilter(filter.id)}
+            className={[
+              "rounded-full h-10 min-h-10 sm:h-8 sm:min-h-8 shadow-xs text-sm bg-white",
+              isActive &&
+                "bg-green-100 text-green-800 not:hover:border-green-200 hover:bg-green-200",
+            ].join(" ")}
+          >
+            {filter.icon}
+            {filter.label}
+          </Button>
+        );
+      })}
     </nav>
   );
 }
