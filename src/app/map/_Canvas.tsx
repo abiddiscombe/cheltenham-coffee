@@ -84,7 +84,11 @@ export default function Canvas() {
       dragRotate={false}
       touchPitch={false}
       maxBounds={[-2.308159, 51.83705, -1.865959, 51.971346]}
-      initialViewState={{ zoom: 12, latitude: 51.900091, longitude: -2.076931 }}
+      initialViewState={{
+        zoom: 12.5,
+        latitude: 51.900091,
+        longitude: -2.076931,
+      }}
       style={{ gridRow: 1, gridColumn: 1, zIndex: 0 }}
     >
       <NavigationControl
