@@ -1,6 +1,6 @@
 # cheltenham-coffee
 
-A web map of coffee shops in Cheltenham (United Kingdom), ~~with support for location filtering~~. Built with NextJS, alongside Tailwind CSS, CVA, MapLibre GL JS, and the Ordnance Survey NGD Tiles API. Location data is stored in a Directus CMS instance.
+A web map of coffee shops in Cheltenham (United Kingdom), with support for location filtering. Built with NextJS, alongside Tailwind CSS, CVA, MapLibre GL JS, and the Ordnance Survey NGD Tiles API. Location data is stored in a Directus CMS instance.
 
 > Disclaimer: The accuracy of information within this application represents a best-effort and is not guaranteed.
 
@@ -14,9 +14,6 @@ A web map of coffee shops in Cheltenham (United Kingdom), ~~with support for loc
 ## Development
 
 ### Environment Variables
-
-`NEXT_PUBLIC_ORIGIN` \
-[ Required ] The [origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Origin) of the server. MapLibre requires the hostname in order to accessing tile data from the backend proxy. For local development this is usually `http://localhost:3000` or your machine's IP address if testing on a mobile device.
 
 `NEXT_PRIVATE_CMS_HOST` \
 [ Required ] The hostname of the CMS service instance.

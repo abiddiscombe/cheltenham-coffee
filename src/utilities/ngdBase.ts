@@ -1,9 +1,25 @@
+"use client";
 import { type StyleSpecification } from "maplibre-gl";
-import { APP_ORIGIN, OS_ATTRIBUTION } from "./constants";
 import ngdBaseStyle from "./ngdBaseStyle.json" with { type: "json" };
 
+function getTileUrl() {
+  if (typeof window === "undefined" || !window?.localStorage) {
+    // Block attempts to access the 'window' global
+    // object in an SSR context (it does not exist).
+
+    return "";
+  }
+
+  return [
+    window.location.protocol,
+    "//",
+    window.location.host,
+    "/api/tiles/vectors/{z}/{y}/{x}",
+  ].join("");
+}
+
 export function getBasemapConfig(): StyleSpecification {
-  const tileUrl = `${APP_ORIGIN}/api/tiles/vectors/{z}/{y}/{x}`;
+  const tileUrl = getTileUrl();
 
   // Ordnance Survey sprite and glyphs don't require
   // authentication - the client can access them directly.
@@ -12,6 +28,9 @@ export function getBasemapConfig(): StyleSpecification {
   const glyphsUrl =
     "https://api.os.uk/maps/vector/ngd/ota/v1/collections/ngd-base/styles/3857/fonts/{fontstack}/{range}.pbf";
 
+  const attribution =
+    "Contains Ordnance Survey data © Crown copyright. Use of this data is subject to terms and conditions.";
+
   return {
     version: 8,
     sprite: spriteUrl,
@@ -19,7 +38,7 @@ export function getBasemapConfig(): StyleSpecification {
     sources: {
       "ngd-base": {
         type: "vector",
-        attribution: OS_ATTRIBUTION,
+        attribution: attribution,
         minzoom: 6,
         maxzoom: 19,
         scheme: "xyz",

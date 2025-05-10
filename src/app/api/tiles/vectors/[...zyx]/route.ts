@@ -1,7 +1,4 @@
-import { OS_API_KEY } from "@/utilities/constants";
-
-const osTilesHost = "https://api.os.uk";
-const osTilesPath = "maps/vector/ngd/ota/v1/collections/ngd-base/tiles/3857";
+import { getOne } from "@/data/ngdTiles";
 
 function validateTile(zyx: string[]) {
   if (zyx.length !== 3) {
@@ -39,16 +36,9 @@ export async function GET(
     );
   }
 
-  const url = new URL(osTilesHost);
-  url.pathname = [osTilesPath, ...zyx].join("/");
+  const [status, body] = await getOne(zyx);
 
-  const data = await fetch(url, {
-    headers: {
-      key: OS_API_KEY,
-    },
-  });
-
-  if (data.status === 404) {
+  if (status === 404) {
     return Response.json(
       {
         error: "Tile not found.",
@@ -58,18 +48,16 @@ export async function GET(
     );
   }
 
-  if (data.status !== 200) {
+  if (status !== 200) {
     return Response.json(
       {
         error: "Upstream tile server unavailable.",
       },
-      { status: 500 },
+      { status: 502 },
     );
   }
 
-  const tile: Blob = await data.blob();
-
-  return new Response(tile, {
+  return new Response(body, {
     status: 200,
     headers: {
       "Body-Source": "Ordnance Survey",

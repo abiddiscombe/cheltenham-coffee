@@ -1,6 +1,9 @@
 import { UUID } from "crypto";
 import { CmsResultSingle, CmsResultMultiple } from "@/utilities/types/cms";
-import { CMS_HOST, CMS_TOKEN, CMS_COLLECTION } from "@/utilities/constants";
+
+const CMS_HOST = process.env["NEXT_PRIVATE_CMS_HOST"]!;
+const CMS_TOKEN = process.env["NEXT_PRIVATE_CMS_TOKEN"]!;
+const CMS_COLLECTION = process.env["NEXT_PRIVATE_CMS_COLLECTION"]!;
 
 export async function getAll(): Promise<
   [number, CmsResultMultiple | undefined]
