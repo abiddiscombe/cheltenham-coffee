@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 import { cva } from "class-variance-authority";
 
 const cvaDescriptionListEntry = cva(
-  "[&>dt]:text-primary-600 [&>dl]:text-primary-700",
+  "[&>dt]:text-primary-700 [&>dl]:text-primary-800",
   {
     variants: {
       icon: {

@@ -40,14 +40,14 @@ export default function OverlayNav() {
       label: "Wi-Fi",
     },
     {
-      id: TAG_DOGS_PERMITTED,
-      icon: <TAG_DOGS_PERMITTED_ICON />,
-      label: "Dogs Permitted",
-    },
-    {
       id: TAG_LAPTOPS_PERMITTED,
       icon: <TAG_LAPTOPS_PERMITTED_ICON />,
       label: "Laptops Permitted",
+    },
+    {
+      id: TAG_DOGS_PERMITTED,
+      icon: <TAG_DOGS_PERMITTED_ICON />,
+      label: "Dogs Permitted",
     },
   ];
 

@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const cvaExternalLink = cva(
-  "underline-offset-2 underline decoration-primary-200 hover:decoration-inherit active:decoration-2",
+  "text-inherit underline-offset-2 underline decoration-primary-200 hover:decoration-inherit active:decoration-2",
 );
 
 export default function ExternalLink(

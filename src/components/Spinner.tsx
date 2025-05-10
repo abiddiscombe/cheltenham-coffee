@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
 const cvaSpinner = cva(
-  "block [&>svg]:text-primary-200 [&>svg]:animate-spin [&>svg]:fill-primary-700",
+  "block [&>svg]:text-primary-200 [&>svg]:animate-spin [&>svg]:fill-primary-800",
   {
     variants: {
       size: {

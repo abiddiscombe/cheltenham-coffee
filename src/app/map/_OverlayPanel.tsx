@@ -64,7 +64,7 @@ export default function OverlayPanel() {
   }
 
   return (
-    <Surface className="m-4 min-h-64 max-w-sm p-8 bg-white/90 backdrop-blur-xs grid place-items-center">
+    <Surface className="transition-fade m-4 min-h-64 max-w-sm p-8 bg-white/80 backdrop-blur-xs grid place-items-center">
       {locationInfoLoading ? (
         <OverlayPanelLoading />
       ) : (
@@ -81,7 +81,7 @@ export default function OverlayPanel() {
                   {locationInfo?.name}
                 </Typography>
                 <Button size="icon" variant="ghost" onClick={handleClosePanel}>
-                  <XIcon />
+                  <XIcon className="stroke-3" />
                 </Button>
               </div>
 
