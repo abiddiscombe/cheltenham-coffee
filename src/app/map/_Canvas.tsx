@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { Map } from "@vis.gl/react-maplibre";
+import { Map, NavigationControl } from "@vis.gl/react-maplibre";
 import { getBasemapConfig } from "@/utilities/ngdBase";
 import { type Location } from "@/utilities/types/location";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
@@ -87,6 +87,10 @@ export default function Canvas() {
       initialViewState={{ zoom: 12, latitude: 51.900091, longitude: -2.076931 }}
       style={{ gridRow: 1, gridColumn: 1, zIndex: 0 }}
     >
+      <NavigationControl
+        showCompass={false}
+        style={{ margin: "1em", marginTop: "5.6em" }}
+      />
       {locations.filter(filterLocationVisibility).map((location) => (
         <Pin key={location.id} {...location} />
       ))}

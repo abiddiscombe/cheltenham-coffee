@@ -1,7 +1,7 @@
 import { useQueryState } from "nuqs";
 import { twMerge } from "tailwind-merge";
 import { MapPinIcon } from "lucide-react";
-import { Marker } from "@vis.gl/react-maplibre";
+import { Marker, useMap } from "@vis.gl/react-maplibre";
 import { NUQS_KEYS } from "@/utilities/constants";
 import { Location } from "@/utilities/types/location";
 
@@ -10,16 +10,29 @@ export default function Pin(p: Location) {
     NUQS_KEYS.LOCATION_ID,
   );
 
+  const { current: map } = useMap();
+
+  function handleSelect() {
+    setActiveLocationId(p.id);
+
+    if (map && map.getZoom() >= 14) {
+      // On mobile viewports, center the map slightly
+      // above the central point, in order to account
+      // for the information panel.
+
+      const lng = p.longitude;
+      const lat = window?.innerWidth <= 600 ? p.latitude - 0.0016 : p.latitude;
+
+      map?.flyTo({ center: [lng, lat] });
+    }
+  }
+
   const classes = twMerge(
     "h-8 w-8 sm:h-6 sm:w-6 text-white cursor-pointer duration-150",
     activeLocationId === p.id
       ? "fill-orange-800 h-10 w-10 sm:h-8 sm:w-8"
       : "fill-orange-600 sm:hover:h-7 sm:hover:w-7 hover:fill-orange-700 active:fill-orange-800",
   );
-
-  function handleSelect() {
-    setActiveLocationId(p.id);
-  }
 
   return (
     <Marker
