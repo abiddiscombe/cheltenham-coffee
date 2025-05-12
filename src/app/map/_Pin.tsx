@@ -15,23 +15,21 @@ export default function Pin(p: Location) {
   function handleSelect() {
     setActiveLocationId(p.id);
 
-    if (map) {
-      // On mobile viewports, center the map slightly
-      // above the central point, in order to account
-      // for the information panel.
+    if (map && window?.innerWidth <= 800) {
+      // On mobile viewports, center the map on the selected
+      // location. Position it slightly above the central
+      // point to account for the information panel.
+
       const MAGIC_LAT_DIFF_LG_SCALE = 0.0016;
       const MAGIC_LAT_DIFF_SM_SCALE = 0.0065;
 
-      const lng = p.longitude;
-      const lat =
-        window?.innerWidth <= 600
-          ? p.latitude -
-            (map.getZoom() >= 13
-              ? MAGIC_LAT_DIFF_LG_SCALE
-              : MAGIC_LAT_DIFF_SM_SCALE)
-          : p.latitude;
+      const adjustedLatitude =
+        p.latitude -
+        (map.getZoom() >= 13
+          ? MAGIC_LAT_DIFF_LG_SCALE
+          : MAGIC_LAT_DIFF_SM_SCALE);
 
-      map?.flyTo({ center: [lng, lat] });
+      map?.flyTo({ center: [p.longitude, adjustedLatitude] });
     }
   }
 
