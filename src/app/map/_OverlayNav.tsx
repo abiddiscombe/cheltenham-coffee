@@ -47,7 +47,7 @@ export default function OverlayNav() {
     {
       id: TAG_DOGS_PERMITTED,
       icon: <TAG_DOGS_PERMITTED_ICON />,
-      label: "Dogs Permitted",
+      label: "Dogs Welcome",
     },
   ];
 
