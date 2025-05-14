@@ -12,6 +12,7 @@ import {
   TAG_CUSTOMER_WIFI,
   TAG_DOGS_PERMITTED,
   TAG_LAPTOPS_PERMITTED,
+  TAG_OUTSIDE_SEATING,
 } from "@/utilities/constants";
 import Pin from "./_Pin";
 
@@ -64,6 +65,13 @@ export default function Canvas() {
     if (
       filters.includes(TAG_LAPTOPS_PERMITTED) &&
       !location.tags.includes(TAG_LAPTOPS_PERMITTED)
+    ) {
+      return false;
+    }
+
+    if (
+      filters.includes(TAG_OUTSIDE_SEATING) &&
+      !location.tags.includes(TAG_OUTSIDE_SEATING)
     ) {
       return false;
     }

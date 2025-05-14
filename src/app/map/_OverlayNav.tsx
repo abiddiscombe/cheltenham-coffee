@@ -10,6 +10,8 @@ import {
   TAG_DOGS_PERMITTED_ICON,
   TAG_LAPTOPS_PERMITTED,
   TAG_LAPTOPS_PERMITTED_ICON,
+  TAG_OUTSIDE_SEATING,
+  TAG_OUTSIDE_SEATING_ICON,
 } from "@/utilities/constants";
 import { useQueryState, parseAsArrayOf, parseAsString } from "nuqs";
 
@@ -48,6 +50,11 @@ export default function OverlayNav() {
       id: TAG_DOGS_PERMITTED,
       icon: <TAG_DOGS_PERMITTED_ICON />,
       label: "Dogs Welcome",
+    },
+    {
+      id: TAG_OUTSIDE_SEATING,
+      icon: <TAG_OUTSIDE_SEATING_ICON />,
+      label: "Outside Seating",
     },
   ];
 
