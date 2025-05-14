@@ -36,8 +36,8 @@ export default function Pin(p: Location) {
   const classes = twMerge(
     "h-8 w-8 sm:h-6 sm:w-6 text-white cursor-pointer duration-150",
     activeLocationId === p.id
-      ? "fill-orange-800 h-10 w-10 sm:h-8 sm:w-8"
-      : "fill-orange-600 sm:hover:h-7 sm:hover:w-7 hover:fill-orange-700 active:fill-orange-800",
+      ? "fill-primary-950 h-10 w-10 sm:h-8 sm:w-8"
+      : "fill-primary-800 sm:hover:h-7 sm:hover:w-7 hover:fill-primary-900 active:fill-primary-950",
   );
 
   return (
