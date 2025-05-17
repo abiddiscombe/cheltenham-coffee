@@ -2,13 +2,7 @@
 import { useQueryState } from "nuqs";
 import { useCallback, useEffect, useState } from "react";
 import { XIcon, LinkIcon, MapPinIcon } from "lucide-react";
-import {
-  NUQS_KEYS,
-  TAG_CUSTOMER_WIFI,
-  TAG_DOGS_PERMITTED,
-  TAG_INDEPENDENT,
-  TAG_LAPTOPS_PERMITTED,
-} from "@/utilities/constants";
+import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
 import { LocationExtended } from "@/utilities/types/location";
 import Button from "@/components/Button";
 import Surface from "@/components/Surface";
@@ -69,7 +63,7 @@ export default function OverlayPanel() {
         <OverlayPanelLoading />
       ) : (
         <>
-          {locationInfoError ? (
+          {locationInfoError && typeof locationInfo === undefined ? (
             <OverlayPanelError
               handleRetry={getDetails}
               handleCancel={handleClosePanel}
@@ -84,35 +78,7 @@ export default function OverlayPanel() {
                   <XIcon className="stroke-3" />
                 </Button>
               </div>
-
-              <Typography variant="body">
-                A
-                {locationInfo?.tags.includes(TAG_INDEPENDENT)
-                  ? "n independent"
-                  : " chain"}{" "}
-                coffee shop
-                {(locationInfo?.tags.includes(TAG_CUSTOMER_WIFI) ||
-                  locationInfo?.tags.includes(TAG_LAPTOPS_PERMITTED)) &&
-                  ", with "}
-                {[
-                  ...(locationInfo?.tags.includes(TAG_CUSTOMER_WIFI)
-                    ? ["customer Wi-Fi"]
-                    : []),
-                  ...(locationInfo?.tags.includes(TAG_LAPTOPS_PERMITTED)
-                    ? ["support for laptops"]
-                    : []),
-                ].join(" and ")}
-                .
-                {locationInfo?.tags.includes(TAG_DOGS_PERMITTED) &&
-                  ` Well-behaved dogs are ${
-                    locationInfo?.tags.includes(TAG_CUSTOMER_WIFI) ||
-                    locationInfo?.tags.includes(TAG_LAPTOPS_PERMITTED)
-                      ? "also "
-                      : ""
-                  }welcome!`}
-              </Typography>
-
-              <DescriptionList>
+              <DescriptionList className="mb-6">
                 {locationInfo?.metadata?.website && (
                   <DescriptionListEntry
                     icon={<LinkIcon />}
@@ -148,6 +114,20 @@ export default function OverlayPanel() {
                     }
                   />
                 )}
+              </DescriptionList>
+              <DescriptionList>
+                {LOCATION_FILTERS.map((filter) => {
+                  if (locationInfo?.tags.includes(filter.id)) {
+                    return (
+                      <DescriptionListEntry
+                        key={filter.id}
+                        icon={<filter.icon />}
+                        name=""
+                        summary={filter.label}
+                      />
+                    );
+                  }
+                })}
               </DescriptionList>
             </div>
           )}
