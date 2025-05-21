@@ -31,7 +31,7 @@ export const LOCATION_FILTERS = [
   {
     id: "wifi-pending",
     icon: WifiIcon,
-    label: "Customer Wi-Fi (Pending)",
+    label: "Customer Wi-Fi (TBC)",
     pending: true,
   },
   {
@@ -43,7 +43,7 @@ export const LOCATION_FILTERS = [
   {
     id: "laptops-permitted-pending",
     icon: LaptopIcon,
-    label: "Laptops Permitted (Pending)",
+    label: "Laptops Permitted (TBC)",
     pending: true,
   },
   {
@@ -55,7 +55,7 @@ export const LOCATION_FILTERS = [
   {
     id: "dogs-permitted-pending",
     icon: PawPrintIcon,
-    label: "Dogs Welcome (Pending)",
+    label: "Dogs Welcome (TBC)",
     pending: true,
   },
   {
@@ -67,7 +67,7 @@ export const LOCATION_FILTERS = [
   {
     id: "outside-pending",
     icon: CloudSunIcon,
-    label: "Outside Seating (Pending)",
+    label: "Outside Seating (TBC)",
     pending: true,
   },
 ];
