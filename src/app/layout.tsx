@@ -6,7 +6,7 @@ import Header from "./_Header";
 export const metadata: Metadata = {
   title: "Cheltenham Coffee",
   description:
-    "A filterable map of coffee shops in Cheltenham (Gloucestershire, UK).",
+    "A web map of coffee shops in Cheltenham (United Kingdom) with support for location filtering.",
 };
 
 export const viewport: Viewport = {

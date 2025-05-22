@@ -2,6 +2,7 @@ import {
   HeartHandshakeIcon,
   WifiIcon,
   PawPrintIcon,
+  CloudSunIcon,
   LaptopIcon,
 } from "lucide-react";
 
@@ -14,15 +15,59 @@ export const NUQS_KEYS = {
   LOCATION_ID: "location",
 };
 
-// Unique Location Tags
-export const TAG_INDEPENDENT = "independent";
-export const TAG_INDEPENDENT_ICON = HeartHandshakeIcon;
-
-export const TAG_CUSTOMER_WIFI = "wifi";
-export const TAG_CUSTOMER_WIFI_ICON = WifiIcon;
-
-export const TAG_DOGS_PERMITTED = "dogs-permitted";
-export const TAG_DOGS_PERMITTED_ICON = PawPrintIcon;
-
-export const TAG_LAPTOPS_PERMITTED = "laptops-permitted";
-export const TAG_LAPTOPS_PERMITTED_ICON = LaptopIcon;
+export const LOCATION_FILTERS = [
+  {
+    id: "independent",
+    icon: HeartHandshakeIcon,
+    label: "Independent",
+    pending: false,
+  },
+  {
+    id: "wifi",
+    icon: WifiIcon,
+    label: "Customer Wi-Fi",
+    pending: false,
+  },
+  {
+    id: "wifi-pending",
+    icon: WifiIcon,
+    label: "Customer Wi-Fi (TBC)",
+    pending: true,
+  },
+  {
+    id: "laptops-permitted",
+    icon: LaptopIcon,
+    label: "Laptops Permitted",
+    pending: false,
+  },
+  {
+    id: "laptops-permitted-pending",
+    icon: LaptopIcon,
+    label: "Laptops Permitted (TBC)",
+    pending: true,
+  },
+  {
+    id: "dogs-permitted",
+    icon: PawPrintIcon,
+    label: "Dogs Welcome",
+    pending: false,
+  },
+  {
+    id: "dogs-permitted-pending",
+    icon: PawPrintIcon,
+    label: "Dogs Welcome (TBC)",
+    pending: true,
+  },
+  {
+    id: "outside",
+    icon: CloudSunIcon,
+    label: "Outside Seating",
+    pending: false,
+  },
+  {
+    id: "outside-pending",
+    icon: CloudSunIcon,
+    label: "Outside Seating (TBC)",
+    pending: true,
+  },
+];

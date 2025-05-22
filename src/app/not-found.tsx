@@ -10,7 +10,7 @@ export default function NotFound() {
         <Typography variant="body">No coffee exists here!</Typography>
         <Link href="/map" passHref>
           <Button variant="solid" className="mx-auto cursor-pointer">
-            Back to the Map
+            Explore Map
           </Button>
         </Link>
       </div>

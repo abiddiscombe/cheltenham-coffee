@@ -6,17 +6,11 @@ import { Map, NavigationControl } from "@vis.gl/react-maplibre";
 import { getBasemapConfig } from "@/utilities/ngdBase";
 import { type Location } from "@/utilities/types/location";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
-import {
-  NUQS_KEYS,
-  TAG_INDEPENDENT,
-  TAG_CUSTOMER_WIFI,
-  TAG_DOGS_PERMITTED,
-  TAG_LAPTOPS_PERMITTED,
-} from "@/utilities/constants";
+import { LOCATION_FILTERS, NUQS_KEYS } from "@/utilities/constants";
 import Pin from "./_Pin";
 
 export default function Canvas() {
-  const [filters] = useQueryState(
+  const [appliedFilters] = useQueryState(
     NUQS_KEYS.FILTERS,
     parseAsArrayOf(parseAsString),
   );
@@ -36,36 +30,19 @@ export default function Canvas() {
   }
 
   function filterLocationVisibility(location: Location) {
-    if (!filters?.length) {
+    if (!appliedFilters?.length) {
       return true;
     }
 
-    if (
-      filters.includes(TAG_INDEPENDENT) &&
-      !location.tags.includes(TAG_INDEPENDENT)
-    ) {
-      return false;
-    }
+    for (let i = 0; i < LOCATION_FILTERS.length; i++) {
+      const filterEntry = LOCATION_FILTERS[i];
 
-    if (
-      filters.includes(TAG_CUSTOMER_WIFI) &&
-      !location.tags.includes(TAG_CUSTOMER_WIFI)
-    ) {
-      return false;
-    }
-
-    if (
-      filters.includes(TAG_DOGS_PERMITTED) &&
-      !location.tags.includes(TAG_DOGS_PERMITTED)
-    ) {
-      return false;
-    }
-
-    if (
-      filters.includes(TAG_LAPTOPS_PERMITTED) &&
-      !location.tags.includes(TAG_LAPTOPS_PERMITTED)
-    ) {
-      return false;
+      if (
+        appliedFilters.includes(filterEntry.id) &&
+        !location.tags.includes(filterEntry.id)
+      ) {
+        return false;
+      }
     }
 
     return true;

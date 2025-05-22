@@ -3,7 +3,7 @@ import { type StyleSpecification } from "maplibre-gl";
 import ngdBaseStyle from "./ngdBaseStyle.json" with { type: "json" };
 
 function getTileUrl() {
-  if (typeof window === "undefined" || !window?.localStorage) {
+  if (typeof window === "undefined") {
     // Block attempts to access the 'window' global
     // object in an SSR context (it does not exist).
 
