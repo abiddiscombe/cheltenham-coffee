@@ -1,0 +1,29 @@
+diff --git a/node_modules/next/dist/server/.DS_Store b/node_modules/next/dist/server/.DS_Store
+new file mode 100644
+index 0000000..a422d2f
+Binary files /dev/null and b/node_modules/next/dist/server/.DS_Store differ
+diff --git a/node_modules/next/dist/server/lib/start-server.js b/node_modules/next/dist/server/lib/start-server.js
+index 59511a7..dcc3175 100644
+--- a/node_modules/next/dist/server/lib/start-server.js
++++ b/node_modules/next/dist/server/lib/start-server.js
+@@ -40,6 +40,7 @@ const _appinfolog = require("./app-info-log");
+ const _turbopackwarning = require("../../lib/turbopack-warning");
+ const _trace = require("../../trace");
+ const _ispostpone = require("./router-utils/is-postpone");
++const _logger = require('pino-http')();
+ const _isipv6 = require("./is-ipv6");
+ const _asynccallbackset = require("./async-callback-set");
+ function _interop_require_default(obj) {
+@@ -150,6 +151,12 @@ async function startServer(serverOptions) {
+         });
+     }
+     async function requestListener(req, res) {
++        if (req.url.includes("/api/locations")) {
++            // note: A code patch for production HTTP transaction logging.
++            // https://www.tomups.com/posts/log-nextjs-request-response-as-json/
++            _logger(req, res);
++        }
++
+         try {
+             if (handlersPromise) {
+                 await handlersPromise;
