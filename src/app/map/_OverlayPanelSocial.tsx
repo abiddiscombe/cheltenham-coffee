@@ -1,4 +1,5 @@
 import { MapPinIcon, GlobeIcon } from "lucide-react";
+import Surface from "@/components/Surface";
 import { conditionallyInclude } from "@/utilities/helpers";
 
 export default function OverlayPanelSocial(p: {
@@ -34,18 +35,18 @@ export default function OverlayPanelSocial(p: {
       ].join(" ")}
     >
       {items.map((item, i) => (
-        <li key={i}>
+        <Surface key={i} as="li" interactive={true} className="p-0">
           <a
             href={item.href}
             target="_blank"
-            className="cursor-pointer border border-primary-200 bg-white rounded min-h-20 hover:shadow-sm active:bg-primary-200 grid place-items-center"
+            className="min-h-20 grid place-items-center"
           >
             <div className="text-primary-600 text-xs [&>svg]:text-primary-800 [&>svg]:mx-auto [&>svg]:mb-1.5 [&>svg]:h-5 [&>svg]:w-5">
               {item.icon}
               {item.label}
             </div>
           </a>
-        </li>
+        </Surface>
       ))}
     </ul>
   );

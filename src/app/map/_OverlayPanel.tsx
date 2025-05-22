@@ -57,7 +57,10 @@ export default function OverlayPanel() {
   }
 
   return (
-    <Surface className="transition-fade m-4 min-h-64 max-w-sm p-8 grid place-items-center">
+    <Surface
+      shadow={true}
+      className="transition-fade m-4 min-h-64 max-w-sm p-8 grid place-items-center"
+    >
       {locationInfoLoading ? (
         <OverlayPanelLoading />
       ) : (
