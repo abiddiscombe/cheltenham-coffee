@@ -39,7 +39,10 @@ export default function Surface(
   );
 
   return (
-    <Tag {...p} className={classes}>
+    <Tag
+      {...{ ...p, shadow: undefined, interactive: undefined }}
+      className={classes}
+    >
       {p.children}
     </Tag>
   );
