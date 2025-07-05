@@ -37,7 +37,7 @@ export const LOCATION_FILTERS = [
   {
     id: "laptops-permitted",
     icon: LaptopIcon,
-    label: "Laptops Permitted",
+    label: "Laptops Welcome",
     pending: false,
   },
   {
