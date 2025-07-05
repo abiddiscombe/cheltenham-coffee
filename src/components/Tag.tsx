@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const cvaTag = cva("block px-2.5 py-0.5 shrink-0 rounded text-sm", {
+const cvaTag = cva("block px-2 py-0.5 shrink-0 rounded text-xs", {
   variants: {
     variant: {
       red: "bg-red-200 text-red-700",

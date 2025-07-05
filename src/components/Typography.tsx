@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 const cvaTypography = cva("", {
   variants: {
     variant: {
-      h1: "text-primary-900",
+      h1: "text-primary-900 font-medium",
       h2: "text-primary-900 text-xl font-semibold mb-4",
       h3: "text-primary-900 text-lg font-semibold mb-2",
       body: "text-primary-800 mb-2 last-of-type:mb-6",
