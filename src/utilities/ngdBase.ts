@@ -24,9 +24,9 @@ export function getBasemapConfig(): StyleSpecification {
   // Ordnance Survey sprite and glyphs don't require
   // authentication - the client can access them directly.
   const spriteUrl =
-    "https://api.os.uk/maps/vector/ngd/ota/v1/collections/ngd-base/styles/3857/sprites/sprite";
+    "https://api.os.uk/maps/vector/ngd/ota/v1/collections/ngd-base/styles/light-3857/sprites/sprite";
   const glyphsUrl =
-    "https://api.os.uk/maps/vector/ngd/ota/v1/collections/ngd-base/styles/3857/fonts/{fontstack}/{range}.pbf";
+    "https://api.os.uk/maps/vector/ngd/ota/v1/collections/ngd-base/styles/light-3857/fonts/{fontstack}/{range}.pbf";
 
   const attribution =
     "Contains Ordnance Survey data © Crown copyright. Use of this data is subject to terms and conditions.";

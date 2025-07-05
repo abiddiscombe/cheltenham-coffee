@@ -37,7 +37,7 @@ export default function Pin(p: Location) {
     "h-8 w-8 sm:h-6 sm:w-6 text-white cursor-pointer duration-150",
     activeLocationId === p.id
       ? "fill-primary-950 h-10 w-10 sm:h-8 sm:w-8"
-      : "fill-primary-800 sm:hover:h-7 sm:hover:w-7 hover:fill-primary-900 active:fill-primary-950",
+      : "fill-primary-600 sm:hover:h-7 sm:hover:w-7 hover:fill-primary-800 active:fill-primary-950",
   );
 
   return (
